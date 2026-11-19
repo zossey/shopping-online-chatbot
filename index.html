@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHOPMATE — Belanja Online Mudah & Terpercaya</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <i class="fa-solid fa-bag-shopping"></i> SHOPMATE
+    </div>
+    <nav class="nav-links">
+      <a href="#home">Beranda</a>
+      <a href="#products">Produk</a>
+      <a href="#contact">Kontak</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn-cart" onclick="toggleCart()" title="Keranjang">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <span class="hero-tag">✨ Terpercaya & Terjangkau</span>
+      <h1>Belanja Mudah,<br/>Harga Terbaik 🛍️</h1>
+      <p>Temukan ribuan produk pilihan dengan kualitas terjamin dan pengiriman cepat ke seluruh Indonesia.</p>
+      <div class="hero-buttons">
+        <a href="#products" class="btn-primary">Lihat Produk</a>
+        <a href="https://wa.me/6281264513583" target="_blank" class="btn-secondary">
+          <i class="fa-brands fa-whatsapp"></i> Hubungi Kami
+        </a>
+      </div>
+    </div>
+    <div class="hero-badges">
+      <div class="badge"><i class="fa-solid fa-truck-fast"></i><span>Gratis Ongkir</span></div>
+      <div class="badge"><i class="fa-solid fa-shield-halved"></i><span>Belanja Aman</span></div>
+      <div class="badge"><i class="fa-solid fa-rotate-left"></i><span>Mudah Return</span></div>
+    </div>
+  </section>
+
+  <!-- ========== PRODUCTS ========== -->
+  <section class="products-section" id="products">
+    <div class="section-header">
+      <h2>Produk Unggulan</h2>
+      <p>Pilih produk favoritmu dan tambahkan ke keranjang</p>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-category="all">Semua</button>
+      <button class="filter-btn" data-category="elektronik">Elektronik</button>
+      <button class="filter-btn" data-category="fashion">Fashion</button>
+      <button class="filter-btn" data-category="aksesoris">Aksesoris</button>
+      <button class="filter-btn" data-category="rumah">Rumah</button>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </section>
+
+  <!-- ========== CART SIDEBAR ========== -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-cart-shopping"></i> Keranjang Belanja</h3>
+      <button onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <p>Keranjang masih kosong</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total">
+        <span>Total Belanja:</span>
+        <strong id="cartTotal">Rp 0</strong>
+      </div>
+      <button class="btn-checkout" onclick="checkout()">
+        <i class="fa-brands fa-whatsapp"></i> Pesan via WhatsApp
+      </button>
+    </div>
+  </aside>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="contact-section" id="contact">
+    <div class="contact-card">
+      <i class="fa-brands fa-whatsapp contact-icon"></i>
+      <h2>Ada Pertanyaan?</h2>
+      <p>Tim kami siap membantu kamu 24/7 melalui WhatsApp. Konfirmasi pembayaran, pertanyaan produk, atau apapun!</p>
+      <a class="btn-wa" href="https://wa.me/6281264513583" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> Chat WhatsApp Sekarang
+      </a>
+      <p class="wa-number">📞 0812-6451-3583</p>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <strong><i class="fa-solid fa-bag-shopping"></i> SHOPMATE</strong>
+        <p>Platform belanja online terpercaya untuk semua kebutuhan kamu.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#home">Beranda</a>
+        <a href="#products">Produk</a>
+        <a href="#contact">Kontak</a>
+        <a href="https://wa.me/6281264513583" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 <strong>SHOPMATE</strong>. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ========== TOAST ========== -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ========== CHATBOT BUTTON ========== -->
+  <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()" title="SHOPMATE AI Customer Service">
+    <i class="fa-solid fa-robot" id="chatbotIcon"></i>
+    <span class="chatbot-notif" id="chatbotNotif"></span>
+  </button>
+
+  <!-- ========== CHATBOT WINDOW ========== -->
+  <div class="chatbot-window" id="chatbotWindow">
+    <div class="chatbot-header">
+      <div class="chatbot-avatar">
+        <i class="fa-solid fa-robot"></i>
+      </div>
+      <div class="chatbot-info">
+        <strong>SHOPMATE AI</strong>
+        <span class="online-dot" id="botStatus">● Online</span>
+      </div>
+      <button class="chatbot-close" onclick="toggleChatbot()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages"></div>
+    <div class="chatbot-quick-replies" id="quickReplies"></div>
+    <div class="chatbot-input-area">
+      <input
+        type="text"
+        id="chatbotInput"
+        placeholder="Ketik pesan kamu..."
+        onkeydown="if(event.key==='Enter') sendMessage()"
+      />
+      <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
